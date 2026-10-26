@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DriveSync – Google Drive folder sync for Ubuntu</title>
+<meta name="description" content="DriveSync keeps a local folder on Ubuntu in two-way sync with a Google Drive folder.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>DriveSync</h1>
+<p class="lead">Two-way Google Drive folder sync for Ubuntu, similar to the "Mirror files" mode of Google Drive for desktop on Windows.</p>
+
+<div class="flow">Local folder on Ubuntu &nbsp;⇄&nbsp; Google Drive &nbsp;⇄&nbsp; your other computers</div>
+
+<h2>What it does</h2>
+<ul>
+  <li>Uploads changes a few seconds after you save a file in the synced folder.</li>
+  <li>Checks Google Drive every few minutes and downloads changes made elsewhere.</li>
+  <li>Keeps both copies when the same file was edited in two places, so nothing is silently overwritten.</li>
+  <li>Refuses to propagate mass deletions without your confirmation.</li>
+  <li>Shows its status in a GNOME tray icon and starts automatically at login.</li>
+</ul>
+
+<h2>How it works</h2>
+<p>DriveSync is a small open-source Python program that runs on your own computer. File transfers are done by
+<a href="https://rclone.org/bisync/">rclone bisync</a>, using a Google sign-in that you authorize yourself.
+There is no DriveSync server: your files go directly between your computer and your Google Drive.</p>
+
+<h2>Install</h2>
+<pre><code>sudo apt install -y python3-venv python3-watchdog python3-gi gir1.2-ayatanaappindicator3-0.1 unzip curl
+curl -fsSL https://rclone.org/install.sh | sudo bash
+git clone https://github.com/temponi8/drivesync.git ~/drivesync &amp;&amp; cd ~/drivesync
+python3 -m venv --system-site-packages .venv
+.venv/bin/pip install -e .
+.venv/bin/drivesync setup</code></pre>
+<p>See the <a href="https://github.com/temponi8/drivesync#readme">README</a> for full documentation.</p>
+
+<footer>
+  <a href="privacy.html">Privacy policy</a> · <a href="https://github.com/temponi8/drivesync">Source code on GitHub</a> · <a href="https://github.com/temponi8/drivesync/issues">Issues</a> · MIT License
+</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drivesync"
+version = "0.1.0"
+description = "Two-way Google Drive folder sync for Ubuntu, powered by rclone bisync"
+requires-python = ">=3.11"
+dependencies = ["watchdog>=4"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+drivesync = "drivesync.cli:main"
+
+[tool.setuptools]
+packages = ["drivesync"]
+
+[tool.setuptools.package-data]
+drivesync = ["filters.txt", "drivesync.service"]

@@ -1,0 +1,24 @@
+# rclone filter rules (https://rclone.org/filtering/). First match wins.
+# Editor / office temp files
+- .~lock.*#
+- ~$*
+- *.swp
+- *.swx
+- *~
+- .#*
+# Partial downloads and OS junk
+- *.part
+- *.crdownload
+- .Trash-*/**
+- .directory
+- desktop.ini
+- Thumbs.db
+- .DS_Store
+# Google Drive for desktop shortcut files (Windows side)
+- *.gdoc
+- *.gsheet
+- *.gslides
+- *.gdraw
+- *.gform
+- *.gmap
+- *.gsite

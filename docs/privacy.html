@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DriveSync – Privacy policy</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>Privacy policy</h1>
+<p class="lead">DriveSync · Last updated: 26 October 2026</p>
+
+<h2>Summary</h2>
+<p>DriveSync runs entirely on your own computer. It does not collect, store, sell or share any personal data, and it has no server of its own.</p>
+
+<h2>What DriveSync accesses</h2>
+<p>When you sign in with Google, you grant DriveSync access to your Google Drive (scope <code>https://www.googleapis.com/auth/drive</code>). It uses this access only to:</p>
+<ul>
+  <li>list, download and upload files in the single Drive folder you choose during setup, and</li>
+  <li>apply changes (create, update, rename, delete) so that folder matches the local folder on your computer.</li>
+</ul>
+<p>It does not read or modify anything outside that folder, and it does not access any other Google service.</p>
+
+<h2>Where your data goes</h2>
+<ul>
+  <li>Files travel directly between your computer and Google's servers over HTTPS. They are never sent to the DriveSync author or any third party.</li>
+  <li>Your Google sign-in token is stored only on your computer, in rclone's configuration file (<code>~/.config/rclone/rclone.conf</code>).</li>
+  <li>Sync logs and status are stored only on your computer (<code>~/.local/state/drivesync/</code>).</li>
+  <li>DriveSync contains no analytics, tracking or advertising.</li>
+</ul>
+
+<h2>Use of Google user data</h2>
+<p>DriveSync's use of information received from Google APIs adheres to the
+<a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+
+<h2>Revoking access and deleting data</h2>
+<p>You can revoke DriveSync's access at any time at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+To remove all local DriveSync data, uninstall the program and delete <code>~/.config/drivesync</code>, <code>~/.local/state/drivesync</code> and the rclone remote (<code>rclone config delete gdrive</code>). Your files in Google Drive and in your local folder are not affected.</p>
+
+<h2>Changes and contact</h2>
+<p>Changes to this policy are published on this page. Questions can be asked by <a href="https://github.com/temponi8/drivesync/issues">opening an issue on GitHub</a>.</p>
+
+<footer><a href="index.html">DriveSync home</a></footer>
+</main>
+</body>
+</html>
