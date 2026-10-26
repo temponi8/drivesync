@@ -43,7 +43,7 @@ Google Docs/Sheets/Slides stay online and are not copied (`skip_gdocs = true`).
 | `drivesync status` | current state, last sync, conflicts |
 | `drivesync sync-now` | ask the running daemon to sync immediately |
 | `drivesync resync` | rebuild the sync baseline (when status says `needs_resync`) |
-| `rclone config reconnect gdrive:` | sign in again when status says `auth_expired` (every 7 days while the Google app is in Testing) |
+| `drivesync reconnect` | sign in to Google again (when status says `auth_expired`) |
 | `drivesync open` | open the local folder |
 | `drivesync run [--no-tray]` | run the daemon in the foreground |
 

@@ -170,6 +170,17 @@ def cmd_resync(_args) -> int:
     return 0 if result.outcome in (syncer.Outcome.OK, syncer.Outcome.CONFLICTS) else 1
 
 
+def cmd_reconnect(_args) -> int:
+    cfg = cfgmod.load()
+    name = cfg.remote.split(":", 1)[0]
+    print("A browser window will open to sign in to Google again…")
+    if subprocess.run(["rclone", "config", "reconnect", f"{name}:"]).returncode != 0:
+        return 1
+    _signal_daemon()
+    print("Signed in. DriveSync will sync now.")
+    return 0
+
+
 def cmd_run(args) -> int:
     from . import daemon
 
@@ -230,6 +241,7 @@ def main(argv=None) -> int:
     sub.add_parser("status", help="show sync status").set_defaults(fn=cmd_status)
     sub.add_parser("resync", help="rebuild the sync baseline after an error").set_defaults(fn=cmd_resync)
     sub.add_parser("open", help="open the local folder").set_defaults(fn=cmd_open)
+    sub.add_parser("reconnect", help="sign in to Google again").set_defaults(fn=cmd_reconnect)
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")

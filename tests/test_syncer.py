@@ -37,6 +37,6 @@ def test_command_flags():
 
 def test_auth_expired():
     out = 'ERROR : couldn\'t fetch token: invalid_grant: maybe token expired? - try refreshing with "rclone config reconnect gdrive:"\n'
-    r = syncer.classify(1, out, "gdrive:")
+    r = syncer.classify(1, out)
     assert r.outcome == Outcome.AUTH_EXPIRED
-    assert "rclone config reconnect gdrive:" in r.message
+    assert "drivesync reconnect" in r.message

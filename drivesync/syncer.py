@@ -84,7 +84,7 @@ _AUTH_RE = re.compile(r"invalid_grant|token (has been )?expired or revoked|could
 _RESYNC_RE = re.compile(r"must run --resync|cannot find prior Path1 or Path2 listings", re.I)
 
 
-def classify(returncode: int, output: str, remote: str = "gdrive:") -> SyncResult:
+def classify(returncode: int, output: str) -> SyncResult:
     conflicts = []
     for line in output.splitlines():
         m = _CONFLICT_RE.search(line)
@@ -98,9 +98,8 @@ def classify(returncode: int, output: str, remote: str = "gdrive:") -> SyncResul
             return SyncResult(Outcome.CONFLICTS, 0, conflicts, f"{len(conflicts)} conflict(s), both copies kept", output)
         return SyncResult(Outcome.OK, 0, [], "Up to date", output)
     if _AUTH_RE.search(output):
-        name = remote.split(":", 1)[0]
         return SyncResult(Outcome.AUTH_EXPIRED, returncode, conflicts,
-                          f"Google sign-in expired. Run: rclone config reconnect {name}:", output)
+                          "Google sign-in expired. Run: drivesync reconnect", output)
     if _RESYNC_RE.search(output):
         return SyncResult(Outcome.NEEDS_RESYNC, returncode, conflicts,
                           "Sync state lost or inconsistent; run 'drivesync resync'", output)
@@ -121,7 +120,7 @@ def run_bisync(cfg: Config, resync: bool = False, dry_run: bool = False) -> Sync
         log.write(f"\n===== {datetime.now().isoformat(timespec='seconds')} bisync {mode}\n")
         log.write(output)
     _trim_log()
-    return classify(proc.returncode, output, cfg.remote)
+    return classify(proc.returncode, output)
 
 
 def _trim_log(max_bytes: int = 5_000_000) -> None:
